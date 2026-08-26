@@ -1,4 +1,18 @@
 // EXPORTS: IProfile, MOCK_PROFILE
+export interface IWork {
+  title: string
+  description: string
+  tags: string[]
+  link?: string
+}
+
+export interface IContact {
+  type: 'email' | 'wechat' | 'phone' | 'github' | 'other'
+  label: string
+  value: string
+  link?: string
+}
+
 export interface IProfile {
   id: string
   name: string
@@ -8,6 +22,8 @@ export interface IProfile {
   currentStatus: string
   feature: string
   recommendedQuestions: string[]
+  works: IWork[]
+  contacts: IContact[]
 }
 
 export const MOCK_PROFILE: IProfile = {
@@ -22,5 +38,30 @@ export const MOCK_PROFILE: IProfile = {
     '你最近在干什么？',
     '还上班吗？',
     'AI可以用来干什么？'
-  ]
+  ],
+  works: [
+    {
+      title: '作品一（待补充）',
+      description: '这里简单描述一下这个作品做了什么、用了什么技术、有什么成果。',
+      tags: ['标签1', '标签2'],
+    },
+    {
+      title: '作品二（待补充）',
+      description: '这里简单描述一下这个作品做了什么、用了什么技术、有什么成果。',
+      tags: ['标签1', '标签2'],
+    },
+  ],
+  contacts: [
+    {
+      type: 'email',
+      label: '邮箱',
+      value: 'your@email.com',
+      link: 'mailto:your@email.com',
+    },
+    {
+      type: 'wechat',
+      label: '微信',
+      value: 'your-wechat-id',
+    },
+  ],
 }
