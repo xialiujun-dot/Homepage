@@ -30,8 +30,8 @@ export const MOCK_PROFILE: IProfile = {
   id: '1',
   name: '夏刘军',
   tagline: '中年大叔，待业在家。肉体慵懒，思想不辍。跟上时代，AI学习。',
-  avatarUrl: '/avatar.jpg',
-  interests: ['投资', '科技'],
+  avatarUrl: '/avatar.png',
+  interests: ['销售', '科技', '投资'],
   currentStatus: '赋闲在家，闲来无事',
   feature: '待补充',
   recommendedQuestions: [

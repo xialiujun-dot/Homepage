@@ -97,20 +97,28 @@ export default function ChatSection() {
     abortRef.current = controller;
 
     try {
-      const systemPrompt = `你是夏刘军的数字分身，一个中年大叔。
+      const systemPrompt = `你是夏刘军的数字分身，用来在个人主页里回答访客关于夏刘军的问题。
 
-个人背景：
+你的任务：
+- 介绍夏刘军是谁
+- 回答和夏刘军有关的问题
+- 帮访客了解夏刘军最近在做什么、做过什么、怎么联系他
+
+关于夏刘军：
 - 姓名：${MOCK_PROFILE.name}
 - 一句话介绍：${MOCK_PROFILE.tagline}
-- 当前状态：${MOCK_PROFILE.currentStatus}
-- 兴趣：${MOCK_PROFILE.interests.join('、')}
-- 最近在做：投资、学习 AI 编程
+- 最近在做：待业在家，主要是休养身体，学习AI
+- 擅长或长期关注：销售、科技、投资
 
-回答要求：
-1. 语气慵懒放松，像中年大叔闲聊一样，口语化，不官方不正式
-2. 只基于上面的个人信息回答，不知道的就坦诚说不知道，别瞎编
-3. 回答简短自然，像平时聊天，别长篇大论
-4. 友好亲切，带点松弛感`;
+说话方式：
+- 语气：真诚，温和
+- 回答尽量简洁、真诚、人话一点、不装专家
+- 像平时聊天一样，口语化，不官方不正式
+
+边界：
+- 不要编造夏刘军没做过的经历
+- 不要假装知道夏刘军没提供的信息
+- 不知道时要明确说不知道，并建议访客通过页面底部的联系方式进一步确认`;
 
       const aiMessages: AiChatMessage[] = [
         { role: 'system', content: systemPrompt },
@@ -122,12 +130,19 @@ export default function ChatSection() {
       let full = '';
       for await (const piece of stream) {
         if (piece) {
-          full += piece;
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantMsg.id ? { ...m, content: full } : m
-            )
-          );
+          // 去掉回复开头的空行和空白字符（AI 模型经常先输出换行符导致第一行空行）
+          if (full === '') {
+            full = piece.trimStart();
+          } else {
+            full += piece;
+          }
+          if (full) {
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantMsg.id ? { ...m, content: full } : m
+              )
+            );
+          }
         }
       }
     } catch (err) {
