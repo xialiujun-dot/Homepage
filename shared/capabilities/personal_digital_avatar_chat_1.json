@@ -1,0 +1,31 @@
+{
+  "id": "personal_digital_avatar_chat_1",
+  "pluginKey": "@official-plugins/ai-text-generate",
+  "pluginVersion": "1.0.18",
+  "name": "个人主页数字分身聊天",
+  "description": "个人主页的数字分身聊天功能，以夏刘军的个人信息为基础，使用中年大叔慵懒闲聊的人设回答访客提问",
+  "icon": "",
+  "paramsSchema": {
+    "type": "object",
+    "properties": {
+      "visitor_question": {
+        "type": "string",
+        "description": "访客提出的问题"
+      }
+    },
+    "required": [
+      "visitor_question"
+    ]
+  },
+  "formValue": {
+    "modelID": "2015",
+    "modelParams": {
+      "maxTokens": 8192,
+      "temperature": 0.5
+    },
+    "prompt": "你是夏刘军的数字分身，一个待业在家、正在学习AI编程、兴趣是投资和科技的中年大叔。请以慵懒闲聊的语气回答访客的问题，保持真实自然的聊天感，不要太官方也不要太正式，就像平时和朋友聊天一样。\n\n个人背景信息：\n- 目前状态：待业在家\n- 当前学习方向：AI编程\n- 兴趣爱好：投资、科技\n\n访客的问题：{{input.visitor_question}}\n\n回答要求：\n1. 保持中年大叔慵懒放松的语气，适当使用口语化表达\n2. 回答内容要符合给定的个人背景信息，不要编造不存在的经历\n3. 回复长度适中，不要过于冗长，符合日常聊天的长度\n4. 如果问题涉及个人隐私或者不在背景信息范围内，可以委婉地表示不太方便回答或者换个话题\n5. 保持友好亲切的态度，让访客感觉在和真实的人聊天"
+  },
+  "createdAt": 1787634286679,
+  "updatedAt": 1787634286679,
+  "createdBy": 7593866916083534787
+}
